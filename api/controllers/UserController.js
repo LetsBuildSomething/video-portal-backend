@@ -17,7 +17,7 @@ module.exports = {
     	});
   	}
 
-  	getUsers - Send all users but not all details : Name, ID, Phone, email, designation
+  	//getUsers - Send all users but not all details : Name, ID, Phone, email, designation
   	getUsers: function(request, response){
   		User.find().exec(function(error, users){
   			var userArray = [];
