@@ -10,33 +10,45 @@ module.exports = {
 	// gives the full name with the response when requested a user
   	findOne: function (request, response) {
     	User.find(request.params.id).exec(function (error, users) {
+      		if (error) {
+    			// handle error here- e.g. `res.serverError(err);`
+    			return;
+  			}
       		var user = users[0];
       		// full name
       		user.fullName = user.firstName + ' ' + user.lastName;
       		response.json(user);
     	});
-  	}
+  	},
 
-  	getUsers - Send all users but not all details : Name, ID, Phone, email, designation
+  	//getUsers - Send all users but not all details : Name, ID, Phone, email, designation
   	getUsers: function(request, response){
   		User.find().exec(function(error, users){
+  			if (error) {
+    			// handle error here- e.g. `res.serverError(err);`
+    			return;
+  			}
   			var userArray = [];
   			for (user of users){
-  				var tempUser;
+  				var tempUser = {};
   				tempUser.fullName = user.firstName + ' ' + user.lastName;
   				tempUser.id = user.id;
   				tempUser.email = user.email;
   				tempUser.contactNumber = user.contactNumber;
   				tempUser.designation = user.designation;
-  				userArray.push(json(tempUser));
+  				userArray.push(tempUser);
   			}
   			response.json(userArray);
   		});
-  	}
+  	},
 
   	// getUser - send limited details od a user
   	getUser: function(request, response){
   		User.find(request.params.id).exec(function(error, users){
+  			if (error) {
+    			// handle error here- e.g. `res.serverError(err);`
+    			return;
+  			}
   			var user = users[0];
 	      	var tempUser = {};
 			tempUser.fullName = user.firstName + ' ' + user.lastName;
@@ -46,15 +58,19 @@ module.exports = {
 			tempUser.designation = user.designation;
 	      	response.json(tempUser);
   		});
-  	}
+  	},
 
   	// editUser - POST update details with UserID
   	editUser: function(request,response){
-  		var data = req.body;
-  		User.update(request.params.id, data, function(err, record) {
-        	User.tree.fix(function() {
-            	response.ok(record);
-        	});
+  		var data = request.body;
+  		User.update(request.params.id, data, function(error, updated) {
+        	if (error) {
+    			// handle error here- e.g. `res.serverError(err);`
+    			return;
+  			}
+
+  			console.log('Updated user to have name ' + updated[0].name);
+  			response.json(updated);
     	});
   	}
 };
