@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  }
+  // '/': {
+  //   view: 'homepage'
+  // },
 
   /***************************************************************************
   *                                                                          *
@@ -46,4 +46,31 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  '/': 'HomepageController.index',
+
+  // user routes
+  'GET /users': 'UserController.getUsers',
+
+  'GET /users/:id': 'UserController.getUser',
+
+  'POST /users/:id': 'UserController.editUser'
+
+  // example routes
+  // 'get /signup': { view: 'conversion/signup' },
+  // 'post /signup': 'AuthController.processSignup',
+  // 'get /login': { view: 'portal/login' },
+  // 'post /login': 'AuthController.processLogin',
+  // '/logout': 'AuthController.logout',
+  // 'get /me': 'UserController.profile'
 };
+
+// HTTP Method  URL         Description
+// POST         /user       creates a new user
+// GET          /user/2     gets a user with ID of 2
+// GET          /user       gets a list of all users
+// PUT          /user/2     updates a user with ID of 2
+// DELETE       /user/2     deletes a user with ID of 2
+
+// /getUsers -> Send all users but not all details : Name, ID, Phone ...
+// /getUser/:ID -> Send full details for userID (Later limit information according to authenticate)
+// /editUser -> POST with UserID
