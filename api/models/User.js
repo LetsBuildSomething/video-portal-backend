@@ -64,8 +64,7 @@ module.exports = {
 
         //create a seperate table to admin roles - and add ability to add new roles
         adminRole: {
-            type: 'string',
-            defaultsTo: 'user'
+            model: 'role'
         }
 	    
 	    // this can be used to associate a one to many relation with a contacts table
