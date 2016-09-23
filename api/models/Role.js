@@ -21,6 +21,20 @@ module.exports = {
       		size: 128,
             required: true
         },	
+
+        // viewable_playlists: {
+        // 	collection: 'playlist',
+        // 	via: 'roles_with_access',
+        // 	dominant: true
+        // },
+
+        // many to many relationship with playlist
+        viewable_playlists: {
+        	collection: 'playlist',
+        	via: 'role',
+        	// dominant: true,
+        	through: 'rolehasplaylist'
+        }
   	}
 };
 
