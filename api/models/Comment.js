@@ -1,5 +1,5 @@
 /**
- * Role.js
+ * Comment.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -16,25 +16,19 @@ module.exports = {
         },
 
         
-        name: {
+        text: {
             type: 'string',
-      		size: 128,
+      		size: 2048,
             required: true
-        },	
+        },
 
-        // viewable_playlists: {
-        // 	collection: 'playlist',
-        // 	via: 'roles_with_access',
-        // 	dominant: true
-        // },
+        author: {
+        	model: 'user'
+        },
 
-        // many to many relationship with playlist
-        viewable_playlists: {
-        	collection: 'playlist',
-        	via: 'role',
-        	// dominant: true,
-        	through: 'rolehasplaylist'
+        // many to one relationship with video
+        video: {
+        	model: 'video'
         }
   	}
 };
-
