@@ -34,6 +34,14 @@ module.exports = {
         	collection: 'video',
         	via: 'playlist',
         	through: 'playlisthasvideo'
+        },
+
+        // association with user
+        // user list to keep users who can answer for the comments
+        users_who_can_answer_comments: {
+        	collection: 'user',
+        	via: 'playlist',
+        	through: 'usercananswercomments'
         }
   	}
 };
