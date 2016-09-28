@@ -49,19 +49,20 @@ module.exports.routes = {
   '/': 'HomepageController.index',
 
   // user routes
+  // 'GET /user/:user_id': 'UserController.findOne',
+
   'GET /users': 'UserController.getUsers',
 
-  'GET /users/:id': 'UserController.getUser',
+  'GET /users/:user_id': 'UserController.getUser',
 
-  'POST /users/:id': 'UserController.editUser'
+  'POST /users/:user_id': 'UserController.editUser',
 
-  // example routes
-  // 'get /signup': { view: 'conversion/signup' },
-  // 'post /signup': 'AuthController.processSignup',
-  // 'get /login': { view: 'portal/login' },
-  // 'post /login': 'AuthController.processLogin',
-  // '/logout': 'AuthController.logout',
-  // 'get /me': 'UserController.profile'
+  // video routes
+  'GET /video/:video_id/users_who_can_answer_comments': 'VideoController.getUsersWhoCanAnswerComments',
+
+  // playlist routes
+  'GET /playlist/:playlist_id/users_who_can_answer_comments': 'PlaylistController.getUsersWhoCanAnswerComments',
+
 };
 
 // HTTP Method  URL         Description

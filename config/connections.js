@@ -45,7 +45,7 @@ module.exports.connections = {
     host: 'localhost',
     user: 'root', //optional
     password: 'raviyamuwek', //optional
-    database: 'hrm_portal_db' //optional
+    database: 'video_portal_db' //optional
   },
 
   /***************************************************************************

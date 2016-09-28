@@ -6,10 +6,10 @@
  */
 
 module.exports = {
-	// inbuilt blueprint action findOne - GET /user/:id
+	// inbuilt blueprint action findOne - GET /user/:user_id
 	// gives the full name with the response when requested a user
   	findOne: function (request, response) {
-    	User.find(request.params.id).exec(function (error, users) {
+    	User.find(request.params.user_id).exec(function (error, users) {
       		if (error) {
     			// handle error here- e.g. `res.serverError(err);`
     			return;
@@ -44,26 +44,26 @@ module.exports = {
 
   	// getUser - send limited details od a user
   	getUser: function(request, response){
-  		User.find(request.params.id).exec(function(error, users){
-  			if (error) {
-    			// handle error here- e.g. `res.serverError(err);`
-    			return;
-  			}
-  			var user = users[0];
-	      	var tempUser = {};
-			tempUser.fullName = user.firstName + ' ' + user.lastName;
-			tempUser.id = user.id;
-			tempUser.email = user.email;
-			tempUser.contactNumber = user.contactNumber;
-			tempUser.designation = user.designation;
-	      	response.json(tempUser);
+  		User.find(request.params.user_id).exec(function(error, users){
+  			 if (error) {
+    			 // handle error here- e.g. `res.serverError(err);`
+    			 return;
+  			 }
+  			 var user = users[0];
+	       var tempUser = {};
+			   tempUser.fullName = user.firstName + ' ' + user.lastName;
+			   tempUser.id = user.id;
+			   tempUser.email = user.email;
+			   tempUser.contactNumber = user.contactNumber;
+			   tempUser.designation = user.designation;
+	       response.json(tempUser);
   		});
   	},
 
   	// editUser - POST update details with UserID
   	editUser: function(request,response){
   		var data = request.body;
-  		User.update(request.params.id, data, function(error, updated) {
+  		User.update(request.params.user_id, data, function(error, updated) {
         	if (error) {
     			// handle error here- e.g. `res.serverError(err);`
     			return;
