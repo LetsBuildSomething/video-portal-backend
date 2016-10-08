@@ -19,6 +19,20 @@ module.exports = {
             // required: true
         },
 
+        username: {
+            type: 'string',
+            size: 128,
+            required: true,
+            unique: true
+        },
+
+        // add encryption / security
+        password: {
+            type: 'string',
+            size: 128,
+            required: true
+        },
+
         // e.g., "Polly"
         firstName: {
             type: 'string',
@@ -62,7 +76,6 @@ module.exports = {
             type: 'string'
         },
 
-        //create a seperate table to admin roles - and add ability to add new roles
         adminRole: {
             model: 'role'
         }
