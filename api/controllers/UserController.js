@@ -6,21 +6,32 @@
  */
 
 module.exports = {
-	// inbuilt blueprint action findOne - GET /user/:user_id
-	// gives the full name with the response when requested a user
-  	findOne: function (request, response) {
-    	User.find(request.params.user_id).exec(function (error, users) {
-      		if (error) {
-    			// handle error here- e.g. `res.serverError(err);`
-    			return;
-  			}
-      		var user = users[0];
-      		// full name
-      		user.fullName = user.firstName + ' ' + user.lastName;
-      		response.json(user);
-    	});
-  	},
+    // createUser - create a user
+    createUser: function(request, response){
+      var user = request.body;
+      User.create(user).exec(function (error, user){
+        if (error) { 
+          return response.serverError(error); 
+        }
 
+        sails.log('user\'s id is:', user.id);
+        return response.json(user);
+      });
+    },
+
+    // deleteUser - delete a user
+    deleteUser: function(request,response){
+      User.destroy({
+        id : request.param('user_id')
+      }).exec(function (error){
+        if (error) {
+          return response.negotiate(error);
+        }
+        sails.log('user with the given id was deleted');
+        return response.ok();
+      });
+    },
+	
   	//getUsers - Send all users but not all details : Name, ID, Phone, email, designation
   	getUsers: function(request, response){
   		User.find().exec(function(error, users){
@@ -28,37 +39,27 @@ module.exports = {
     			// handle error here- e.g. `res.serverError(err);`
     			return;
   			}
-  			var userArray = [];
-  			for (user of users){
-  				var tempUser = {};
-  				tempUser.fullName = user.firstName + ' ' + user.lastName;
-  				tempUser.id = user.id;
-  				tempUser.email = user.email;
-  				tempUser.contactNumber = user.contactNumber;
-  				tempUser.designation = user.designation;
-  				userArray.push(tempUser);
+  			for (user of users){	
+  				user.name = user.firstName + ' ' + user.lastName;
   			}
-  			response.json(userArray);
+  			response.json(users);
   		});
   	},
 
+
   	// getUser - send limited details od a user
   	getUser: function(request, response){
-  		User.find(request.params.user_id).exec(function(error, users){
-  			 if (error) {
-    			 // handle error here- e.g. `res.serverError(err);`
-    			 return;
-  			 }
-  			 var user = users[0];
-	       var tempUser = {};
-			   tempUser.fullName = user.firstName + ' ' + user.lastName;
-			   tempUser.id = user.id;
-			   tempUser.email = user.email;
-			   tempUser.contactNumber = user.contactNumber;
-			   tempUser.designation = user.designation;
-	       response.json(tempUser);
-  		});
+
+      UserService.getSingleUser({
+        user_id : request.param('user_id')
+      }, function getSingleUserCallback(error, user){
+        if (!error) {
+          response.json(user);    
+        }
+      });
   	},
+
+
 
   	// editUser - POST update details with UserID
   	editUser: function(request,response){
