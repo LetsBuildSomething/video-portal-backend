@@ -49,13 +49,18 @@ module.exports.routes = {
   '/': 'HomepageController.index',
 
   // user routes
-  // 'GET /user/:user_id': 'UserController.findOne',
+  'GET /user/:user_id': 'UserController.getUser',
+  'GET /user': 'UserController.getUsers', 
+  'POST /user': 'UserController.createUser',
+  'POST /user/:user_id': 'UserController.editUser',
+  'DELETE /user/:user_id': 'UserController.deleteUser',
 
-  'GET /users': 'UserController.getUsers',
-
-  'GET /users/:user_id': 'UserController.getUser',
-
-  'POST /users/:user_id': 'UserController.editUser',
+  // role endpoints
+  'GET /role': 'RoleController.getRoles', 
+  'POST /role': 'RoleController.createRole',
+  'DELETE /role/:role_id': 'RoleController.deleteRole',
+  'POST /role/:role_id/add_playlists': 'RoleController.addPlaylists',
+  'POST /role/:role_id/remove_playlists': 'RoleController.removePlaylists',
 
   // video routes
   'GET /video/:video_id/users_who_can_answer_comments': 'VideoController.getUsersWhoCanAnswerComments',
