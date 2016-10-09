@@ -34,7 +34,7 @@ module.exports = {
 	
   	//getRoles - Send all roles
   	getRoles: function(request, response){
-  		Role.find().exec(function(error, roles){
+  		Role.find().populate('viewable_playlists').exec(function(error, roles){
   			if (error) {
     			// handle error here- e.g. `res.serverError(err);`
     			return;

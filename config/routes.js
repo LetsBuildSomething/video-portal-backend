@@ -63,7 +63,7 @@ module.exports.routes = {
   'POST /role/:role_id/remove_playlists': 'RoleController.removePlaylists',
 
   // video routes
-  'GET /video/:video_id/users_who_can_answer_comments': 'VideoController.getUsersWhoCanAnswerComments',
+  // 'GET /video/:video_id/users_who_can_answer_comments': 'VideoController.getUsersWhoCanAnswerComments',
 
   // playlist routes
   'GET /playlist/:playlist_id/users_who_can_answer_comments': 'PlaylistController.getUsersWhoCanAnswerComments',
